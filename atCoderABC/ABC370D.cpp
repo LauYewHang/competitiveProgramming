@@ -19,38 +19,37 @@ struct WALL{
 int main(){
     int a;
     WALL W1;
-    cout << W1.right << "\n";
     vector <WALL> grid;
     
-    WALL* nextWallptr = nullptr;
-    WALL* currentWallptr = nullptr;
-    WALL currentWall;
+    WALL* previousWALL = nullptr;
     for (int i = 0; i < 10; i++){
-        currentWall = WALL(i);
-        currentWallptr = &currentWall;
-        cout << "currentwallptr: " << currentWallptr << endl;
-        grid.emplace_back(*currentWallptr);
+        grid.emplace_back(WALL(i));
+        previousWALL = &(grid[i]);
         switch(i){
             case 0:
                 break;
             default:
-                break;
+                grid[i].left = previousWALL;
         }
     }
+
+    for (WALL w : grid){
+        cout << "reference: " << (&(w)) << "  data: " << (&w)->data << endl;
+        cout << "previous reference: " << (&w)->left << endl;
+    }
+
+    /*
+    cout << "bomb:\n";
     cout << grid.size() << "\n";
     for (WALL p : grid){
-        cout << &p << " ";
+        cout << (&p)->bomb << endl;
     }
-    cout << endl;
-    grid[3].bomb = 0;
-    for (WALL p : grid){
-        cout << p.bomb << " ";
+
+    for (int i = 0; i < grid.size(); i++){
+        cout << &(grid[i]) << endl;
     }
-    cout << endl;
-    for (WALL p : grid){
-        cout << (&(p)) -> data << " ";
-    }
-    cout << endl;
+    */
+    
     /*
     for (int i = 0; i < 3; i++){
         cin >> a;
