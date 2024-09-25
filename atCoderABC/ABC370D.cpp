@@ -22,20 +22,25 @@ int main(){
     vector <WALL> grid;
     
     WALL* previousWALL = nullptr;
+    WALL* nextWALL = nullptr;
     for (int i = 0; i < 10; i++){
         grid.emplace_back(WALL(i));
-        previousWALL = &(grid[i]);
         switch(i){
             case 0:
                 break;
             default:
+                nextWALL = &(grid[i]);
                 grid[i].left = previousWALL;
+                grid[i-1].right = nextWALL;
+                break;
         }
+        previousWALL = &(grid[i]);
     }
 
     for (WALL w : grid){
         cout << "reference: " << (&(w)) << "  data: " << (&w)->data << endl;
-        cout << "previous reference: " << (&w)->left << endl;
+        cout << "previous reference: " << (&w)->left << ", p_data: " << ((&w)->left == nullptr ? "null" : to_string((&w)->left->data)) << endl;
+        cout << "next reference: " << (&w)->right << ", n_data: " << ((&w)->right == nullptr ? "null" : to_string((&w)->right->data)) << endl << endl;
     }
 
     /*
