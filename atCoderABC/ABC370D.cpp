@@ -22,16 +22,18 @@ int main(){
     
     WALL* nextWall = nullptr;
     for (int i = 0; i < 10; i++){
-        if (i != 0 && i != 10-1){
-            grid.emplace_back(WALL(i, nextWall));
-            nextWall = &grid[i];
-        }else{
-            grid.emplace_back(WALL());
-            nextWall = &grid[i];
+        grid.emplace_back(WALL(i));
+        nextWall = &grid[i];
+        switch(i){
+            case 0:
+                break;
+            default:
+                grid[i-1].right = nextWall;
+                break;
         }
     }
     cout << grid.size() << "\n";
     for (WALL p : grid){
-        cout << p.right << " ";
+        cout << (p.right)->data << " ";
     }
 }
