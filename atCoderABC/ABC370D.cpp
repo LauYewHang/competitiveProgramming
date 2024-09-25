@@ -19,7 +19,7 @@ struct WALL{
 int main(){
     int a;
     WALL W1;
-    vector <WALL> grid;
+    vector <WALL> grid, grid2;
     
     WALL* previousWALL = nullptr;
     WALL* nextWALL = nullptr;
@@ -30,18 +30,52 @@ int main(){
                 break;
             default:
                 nextWALL = &(grid[i]);
+                cout << nextWALL << endl;
                 grid[i].left = previousWALL;
                 grid[i-1].right = nextWALL;
                 break;
         }
         previousWALL = &(grid[i]);
     }
+    cout << endl << endl;
 
+    cout << "references:\n";
+    for (int i = 0; i < 10; i++){
+        cout << &(grid[i]) << ", val: " << (&grid[i]) -> data << endl;
+        cout << "p_reference: " << ((&(grid[i]))->left == nullptr ? nullptr : (&grid[i])->left) << ", p_val: " << ((&(grid[i]))->left == nullptr ? -1 : (&grid[i])->left->data) << endl;
+        cout << endl;
+    }
+    cout << endl;
+
+    WALL* newWALLptr = nullptr;
+    WALL* newWALLptr2 = nullptr;
+    WALL newWALL;
+    WALL newWALL2;
+    //cout << "\ngrid2:\n";
+    /*
+    for (int i = 0; i < 10; i++){
+        newWALL = WALL(i);
+        newWALL2 = WALL(i);
+        newWALLptr = &newWALL;
+        newWALLptr2 = &newWALL2;
+        cout << newWALLptr << ", " << newWALLptr2 << "\n";
+        grid2.emplace_back(*newWALLptr);
+    }
+    cout << "\n";
+
+    for (WALL w : grid2){
+        cout << &w << ", " << (&w)->data << "\n";
+    }
+    */
+    //cout << &grid2 << "\n";
+
+    /*
     for (WALL w : grid){
         cout << "reference: " << (&(w)) << "  data: " << (&w)->data << endl;
         cout << "previous reference: " << (&w)->left << ", p_data: " << ((&w)->left == nullptr ? "null" : to_string((&w)->left->data)) << endl;
         cout << "next reference: " << (&w)->right << ", n_data: " << ((&w)->right == nullptr ? "null" : to_string((&w)->right->data)) << endl << endl;
     }
+    */
 
     /*
     cout << "bomb:\n";
@@ -71,6 +105,7 @@ int main(){
     }
     */
 
+    /*
     cout << "input:\n";
     for (int i = 0; i < 3; i++){
         cin >> a;
@@ -86,4 +121,5 @@ int main(){
             cout << "next reference: " << (&w)->right << ", n_data: " << ((&w)->right == nullptr ? "null" : to_string((&w)->right->data)) << endl << endl;
         }
     }
+    */
 }
