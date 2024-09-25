@@ -70,4 +70,20 @@ int main(){
         }
     }
     */
+
+    cout << "input:\n";
+    for (int i = 0; i < 3; i++){
+        cin >> a;
+        if (grid[a].bomb == 1)
+            grid[a].bomb = 0;
+        else{
+            grid[a].right->bomb = 0;
+            grid[a].right = grid[a].right->right;
+        }
+        for (WALL w : grid){
+            cout << "reference: " << (&(w)) << "  bomb: " << (&w)->bomb << endl;
+            cout << "previous reference: " << (&w)->left << ", p_data: " << ((&w)->left == nullptr ? "null" : to_string((&w)->left->data)) << endl;
+            cout << "next reference: " << (&w)->right << ", n_data: " << ((&w)->right == nullptr ? "null" : to_string((&w)->right->data)) << endl << endl;
+        }
+    }
 }
